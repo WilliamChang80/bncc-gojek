@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SecondPage"
-    android:background="@color/White"
+    android:background="#e8e8e8"
     >
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="30dp"
-        android:background="@color/OffWhite"
+        android:background="@color/White"
         android:fontFamily="@font/rubik_bold"
         android:gravity="center"
         android:text="Indonesia"
@@ -33,4 +33,45 @@
         android:layout_alignBottom="@id/TextView_header"
         android:layout_marginStart="10dp"
         android:src="@drawable/back" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:src="@drawable/white_shape"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="120dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jawa Timur"
+        android:textSize="30sp"
+        android:textColor="@color/Indigo"
+        android:fontFamily="@font/rubik_bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="195dp"
+        android:src="@drawable/oval_blue" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18308"
+        android:textColor="@color/White"
+        android:fontFamily="@font/rubik_bold"
+        android:layout_marginLeft="67dp"
+        android:layout_marginTop="230dp"
+
+        />
+
+
 </RelativeLayout>
