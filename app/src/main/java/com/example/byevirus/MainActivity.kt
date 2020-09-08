@@ -17,9 +17,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val arrow_click_1 = findViewById(R.id.Image_arrow) as ImageView
+        val about_click = findViewById(R.id.Image_info) as ImageView
 
         arrow_click_1.setOnClickListener{
             openSecondPage()
+        }
+
+        about_click.setOnClickListener {
+            openAbout()
         }
 
     }
@@ -27,6 +32,11 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, SecondPage::class.java).apply {
             putExtra(extra, "This is from main activity")
         }
+        startActivity(intent)
+    }
+
+    private fun openAbout(){
+        val intent = Intent(this, about_pop::class.java)
         startActivity(intent)
     }
 }
