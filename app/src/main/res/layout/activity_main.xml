@@ -139,9 +139,9 @@
             android:id="@+id/Card_Recovered"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="25dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/Card_Death"
             android:layout_toRightOf="@id/Card_Positive"
             app:cardCornerRadius="18dp"
@@ -203,7 +203,7 @@
                     android:fontFamily="@font/rubik_bold"
                     android:text="4143"
                     android:textColor="@color/White"
-                    android:textSize="18sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/TextView_death"

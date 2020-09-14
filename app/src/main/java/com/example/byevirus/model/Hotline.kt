@@ -1,6 +1,6 @@
-package com.example.byevirus
+package com.example.byevirus.model
 
-data class HotlineData (
+data class Hotline (
     val imgIcon: String,
     val name: String,
     val phone: String

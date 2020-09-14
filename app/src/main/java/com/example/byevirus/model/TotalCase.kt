@@ -1,6 +1,6 @@
-package com.example.byevirus
+package com.example.byevirus.model
 
-data class TotalCases (
+data class TotalCase (
     val hospitalize : String,
     val positive : String,
     val recovered : String,

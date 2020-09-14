@@ -1,34 +1,55 @@
-package com.example.byevirus
+package com.example.byevirus.fragment
 
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.byevirus.model.Hotline
+import com.example.byevirus.R
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_hotline_bottom_sheet.*
-import kotlinx.android.synthetic.main.activity_look_up.*
-import lookup.HotlineAdapter
+import com.example.byevirus.adapter.HotlineAdapter
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
 
-class HotlineActivity: AppCompatActivity() {
-
-
+class BottomSheetFragment: BottomSheetDialogFragment(){
 
     private val mockHotlineList = mutableListOf(
-        HotlineData(name = "Loading...", imgIcon = "", phone = ""),
+        Hotline(
+            name = "Loading...",
+            imgIcon = "",
+            phone = ""
+        ),
     )
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_hotline_bottom_sheet)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view: View = inflater.inflate(R.layout.activity_hotline_bottom_sheet,container,false)
+        return view
+    }
+
+    //buat tambahin button click listener di dalam di bottom sheet
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val okHttpClient = OkHttpClient()
 
         val hotlineAdapter = HotlineAdapter(mockHotlineList)
-        rvhotline.layoutManager = LinearLayoutManager(this)
+        rvhotline.layoutManager = LinearLayoutManager(context)
         rvhotline.adapter = hotlineAdapter
 
+        val close = view.findViewById<ImageView>(R.id.Image_X)
+
+                close.setOnClickListener {
+            this@BottomSheetFragment.dismiss()
+        }
 
 
         val request: Request = Request.Builder()
@@ -37,13 +58,13 @@ class HotlineActivity: AppCompatActivity() {
         //new call buat request yang di prepare sama okhttp dan enqueue buat jalanin
         okHttpClient.newCall(request).enqueue(getCallback(hotlineAdapter))
     }
-
     private fun getCallback(hotlineAdapter: HotlineAdapter): Callback {
         //object buat bikin class dari interface
         return object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                this@HotlineActivity.runOnUiThread {
-                    Toast.makeText(this@HotlineActivity, e.message, Toast.LENGTH_SHORT).show()
+               //pake activity krn fragment attach di activity
+                this@BottomSheetFragment.activity?.runOnUiThread() {
+                    Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -52,12 +73,12 @@ class HotlineActivity: AppCompatActivity() {
                 try {
                     val jsonString: String? = response.body?.string()
                     val jsonArray = JSONArray(jsonString)
-                    val hotlineListFromNetwork: MutableList<HotlineData> =
-                        mutableListOf<HotlineData>()
+                    val hotlineListFromNetwork: MutableList<Hotline> =
+                        mutableListOf<Hotline>()
 
                     for (i in 0 until jsonArray.length()) {
                         hotlineListFromNetwork.add(
-                            HotlineData(
+                            Hotline(
                                 imgIcon = jsonArray.getJSONObject(i).getString("img_icon"),
                                 phone = jsonArray.getJSONObject(i).getString("phone"),
                                 name = jsonArray.getJSONObject(i).getString("name"),
@@ -65,19 +86,17 @@ class HotlineActivity: AppCompatActivity() {
                                 )
                         )
                     }
-                    this@HotlineActivity.runOnUiThread {
+                    this@BottomSheetFragment.activity?.runOnUiThread {
                         hotlineAdapter.updateData(hotlineListFromNetwork)
                     }
 
                 } catch (e: Exception) {
-                    this@HotlineActivity.runOnUiThread {
-                        Toast.makeText(this@HotlineActivity, e.message, Toast.LENGTH_SHORT).show()
+                    this@BottomSheetFragment.activity?.runOnUiThread {
+                        Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                     }
                 }
 
             }
-
         }
-    }
-
+     }
     }

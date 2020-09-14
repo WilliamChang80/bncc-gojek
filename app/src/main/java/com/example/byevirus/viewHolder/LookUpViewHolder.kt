@@ -1,9 +1,8 @@
-package adapter
+package com.example.byevirus.viewHolder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.byevirus.HotlineData
-import com.example.byevirus.lookup.LookUp
+import com.example.byevirus.model.LookUp
 import kotlinx.android.synthetic.main.item_look_up.view.*
 
 class LookUpViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

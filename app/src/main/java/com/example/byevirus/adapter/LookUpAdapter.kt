@@ -1,12 +1,11 @@
-package lookup
+package com.example.byevirus.adapter
 
-import adapter.LookUpViewHolder
+import com.example.byevirus.viewHolder.LookUpViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.byevirus.HotlineData
 import com.example.byevirus.R
-import com.example.byevirus.lookup.LookUp
+import com.example.byevirus.model.LookUp
 
 class LookUpAdapter
     (private val lookUpList: MutableList<LookUp>): RecyclerView.Adapter<LookUpViewHolder>(){

@@ -1,4 +1,4 @@
-package com.example.byevirus.lookup
+package com.example.byevirus.model
 
 data class LookUp (
     val provinceName: String,

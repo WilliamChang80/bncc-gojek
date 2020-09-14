@@ -1,4 +1,4 @@
-package com.example.byevirus
+package com.example.byevirus.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,61 +7,57 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.example.byevirus.lookup.LookUp
-import kotlinx.android.synthetic.main.item_hotline.view.*
-import lookup.LookUpAdapter
+import com.example.byevirus.fragment.BottomSheetFragment
+import com.example.byevirus.R
+import com.example.byevirus.constants.ApiUrl.Companion.HOMEPAGE_API_URL
+import com.example.byevirus.model.TotalCase
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
-import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
 
     //buat mastiin key tidak berbeda atau tetep sama, seperti static variabel
-    companion object {
-        const val extra = "Extra"
-        const val bottomSheetFragment = "BottomSheetFragment"
-    }
+
 
     private val okHttpClient = OkHttpClient()
 
     private val mockHomeList = mutableListOf(
-        TotalCases(hospitalize = "Loading...", positive = " ", recovered = " ", death = " "),
+        TotalCase(
+            hospitalize = "Loading...",
+            positive = " ",
+            recovered = " ",
+            death = " "
+        ),
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomSheetFragment = BottomSheetFragment()
-        val arrow_click_1 = findViewById<ImageView>(R.id.Image_arrow)
-        val arrow_click_2 = findViewById<ImageView>(R.id.Image_arrow2)
+        val bottomSheetFragment =
+            BottomSheetFragment()
+        val arrow1 = findViewById<ImageView>(R.id.Image_arrow)
+        val arrow2 = findViewById<ImageView>(R.id.Image_arrow2)
 
         val request: Request = Request.Builder()
-            .url("https://api.kawalcorona.com/indonesia/")
+            .url(HOMEPAGE_API_URL)
             .build()
         //new call buat request yang di prepare sama okhttp dan enqueue buat jalanin
         okHttpClient.newCall(request).enqueue(getCallback())
 
-//             val close = findViewById<ImageView>(R.id.Image_X)
-//
-//                close.setOnClickListener {
-//            bottomSheetFragment.dismiss()
-//        }
-
-
         //klik arrow 1 LOOk UP
-        arrow_click_1.setOnClickListener {
+        arrow1.setOnClickListener {
             openSecondPage()
         }
         // klik arrow 2 hotline
-        arrow_click_2.setOnClickListener {
+        arrow2.setOnClickListener {
             bottomSheetFragment.show(supportFragmentManager, "bottomSheetDialog")
         }
 
 
-//        bottomSheetFragment.isCancelable = false
+
     }
     private fun getCallback(): Callback {
         return object : Callback {
@@ -75,12 +71,12 @@ class MainActivity : AppCompatActivity() {
                 try {
                     val jsonString: String? = response.body?.string()
                     val jsonArray = JSONArray(jsonString)
-                    val homeListFromNetwork: MutableList<TotalCases> = mutableListOf<TotalCases>()
+                    val homeListFromNetwork: MutableList<TotalCase> = mutableListOf<TotalCase>()
                     Log.d("msg", "hayo")
 
                     for (i in 0 until jsonArray.length()){
                         homeListFromNetwork.add(
-                            TotalCases(
+                            TotalCase(
                                 hospitalize = jsonArray.getJSONObject(i).getString("positif"),
                                 positive = jsonArray.getJSONObject(i).getString("dirawat"),
                                 recovered = jsonArray.getJSONObject(i).getString("sembuh"),
@@ -108,7 +104,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun openSecondPage() {
         val intent = Intent(this, LookUpActivity::class.java).apply {
-            putExtra(extra, "This is from main activity")
+            putExtra("extra", "This is from main activity")
         }
         startActivity(intent)
     }

@@ -1,14 +1,13 @@
-package lookup
+package com.example.byevirus.adapter
 
-import adapter.HotlineViewHolder
-import adapter.LookUpViewHolder
+import com.example.byevirus.viewHolder.HotlineViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.byevirus.HotlineData
+import com.example.byevirus.model.Hotline
 import com.example.byevirus.R
 
-class HotlineAdapter(private val hotlineList: MutableList<HotlineData>): RecyclerView.Adapter<HotlineViewHolder>(){
+class HotlineAdapter(private val hotlineList: MutableList<Hotline>): RecyclerView.Adapter<HotlineViewHolder>(){
 
 
 
@@ -29,7 +28,7 @@ class HotlineAdapter(private val hotlineList: MutableList<HotlineData>): Recycle
         holder.bind(hotlineList[position])
     }
 
-    fun updateData(newList: MutableList<HotlineData>) {
+    fun updateData(newList: MutableList<Hotline>) {
         hotlineList.clear()
         hotlineList.addAll(newList)
         notifyDataSetChanged()

@@ -1,22 +1,20 @@
-package com.example.byevirus
+package com.example.byevirus.activity
 
 import android.content.Intent
-import android.graphics.PointF.length
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.byevirus.lookup.LookUp
+import com.example.byevirus.R
+import com.example.byevirus.model.LookUp
 import kotlinx.android.synthetic.main.activity_look_up.*
-import lookup.HotlineAdapter
-import lookup.LookUpAdapter
+import com.example.byevirus.adapter.LookUpAdapter
+import com.example.byevirus.constants.ApiUrl.Companion.LOOKUP_API_URL
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
 import java.lang.Exception
-import java.util.*
 
 //mutable list lebih multiplatform ketimbang array
 class LookUpActivity : AppCompatActivity() {
@@ -27,7 +25,12 @@ class LookUpActivity : AppCompatActivity() {
 
 
     private val mockLookUpList = mutableListOf(
-        LookUp(provinceName = "Loading...", numberOfPositiveCases = " ", numberOfRecoveredCases = " ", numberOfDeathCases = " " ),
+        LookUp(
+            provinceName = "Loading...",
+            numberOfPositiveCases = " ",
+            numberOfRecoveredCases = " ",
+            numberOfDeathCases = " "
+        ),
 
     )
 
@@ -47,7 +50,7 @@ class LookUpActivity : AppCompatActivity() {
             backToMainPage()
         }
         val request: Request = Request.Builder()
-            .url("https://api.kawalcorona.com/indonesia/provinsi/")
+            .url(LOOKUP_API_URL )
             .build()
         okHttpClient.newCall(request).enqueue(getCallback(lookUpAdapter))
 
