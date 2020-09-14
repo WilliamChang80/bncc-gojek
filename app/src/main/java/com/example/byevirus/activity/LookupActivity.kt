@@ -1,25 +1,26 @@
-package com.example.byevirus
+package com.example.byevirus.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import com.example.byevirus.R
 
-class SecondPage : AppCompatActivity() {
+class LookupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second_page)
 
-        val arrow_click_back = findViewById(R.id.ImageView_back) as ImageView
+        val arrowClickBack = findViewById<ImageView>(R.id.ImageView_back)
 
-        arrow_click_back.setOnClickListener{
+        arrowClickBack.setOnClickListener {
             backToFirstPage()
         }
 
     }
 
-    private fun backToFirstPage(){
-        val intent = Intent(this, MainActivity::class.java).apply{
+    private fun backToFirstPage() {
+        val intent = Intent(this, MainActivity::class.java).apply {
 
         }
         startActivity(intent)

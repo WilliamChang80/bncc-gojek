@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".about_pop"
-            android:theme="@style/AppTheme.aboutPop"
-            ></activity>
-        <activity android:name=".HotlineBottomSheet" />
-        <activity android:name=".SecondPage" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".fragments.AboutFragment"
+            android:theme="@style/AppTheme.aboutPop"></activity>
+        <activity android:name=".activity.LookupActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

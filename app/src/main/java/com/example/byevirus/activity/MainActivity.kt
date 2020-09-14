@@ -1,9 +1,11 @@
-package com.example.byevirus
+package com.example.byevirus.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import com.example.byevirus.R
+import com.example.byevirus.fragments.AboutFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,14 +31,14 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun openSecondPage(){
-        val intent = Intent(this, SecondPage::class.java).apply {
+        val intent = Intent(this, LookupActivity::class.java).apply {
             putExtra(extra, "This is from main activity")
         }
         startActivity(intent)
     }
 
     private fun openAbout(){
-        val intent = Intent(this, about_pop::class.java)
+        val intent = Intent(this, AboutFragment::class.java)
         startActivity(intent)
     }
 }

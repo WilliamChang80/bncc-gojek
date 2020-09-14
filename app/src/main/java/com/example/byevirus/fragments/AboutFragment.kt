@@ -1,12 +1,12 @@
-package com.example.byevirus
+package com.example.byevirus.fragments
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Gravity
-import android.view.WindowManager
+import com.example.byevirus.R
 
-class about_pop : AppCompatActivity() {
+class AboutFragment : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_pop)

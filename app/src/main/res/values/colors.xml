@@ -13,4 +13,5 @@
     <color name="OffWhite">#F1f1f1</color>
     <color name="White">#FFFFFF</color>
     <color name="fadePopUp">#A63F4751</color>
+    <color name="round">#eeeeff</color>
 </resources>
