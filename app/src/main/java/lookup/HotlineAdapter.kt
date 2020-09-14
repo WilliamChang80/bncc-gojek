@@ -1,4 +1,0 @@
-package lookup
-
-class HotlineAdapter {
-}
