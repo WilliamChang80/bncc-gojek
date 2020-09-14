@@ -1,4 +1,8 @@
-package lookup
+package com.example.byevirus.lookup
 
-class LookUp {
-}
+data class LookUp (
+    val provinceName: String,
+    val numberOfPositiveCases: String,
+    val numberOfRecoveredCases: String,
+    val numberOfDeathCases: String
+)
