@@ -1,4 +1,4 @@
-package com.example.byevirus.fragments
+package com.example.byevirus.fragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

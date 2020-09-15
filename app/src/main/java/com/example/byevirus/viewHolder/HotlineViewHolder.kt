@@ -14,9 +14,5 @@ class HotlineViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             Picasso.get().load(data.imgIcon).into(itemView.Image_Lembaga)
         }
         itemView.TextView_phone.text = data.phone
-
-        //itemView.Label_recovered.text = data.numberOfRecoveredCases
-        //kl misalnya mau dijadiin string bisa dengan ini
-        //itemView.Label_recovered.text = "${data.numberOfRecoveredCases}"
     }
 }
