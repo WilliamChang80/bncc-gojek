@@ -7,16 +7,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ethanhua.skeleton.Skeleton
+import com.ethanhua.skeleton.SkeletonScreen
 import com.example.byevirus.model.Hotline
 import com.example.byevirus.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_hotline_bottom_sheet.*
 import com.example.byevirus.adapter.HotlineAdapter
+import com.example.byevirus.constants.ApiUrl
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
 
-class BottomSheetFragment: BottomSheetDialogFragment(){
+class BottomSheetFragment : BottomSheetDialogFragment() {
 
     private val mockHotlineList = mutableListOf(
         Hotline(
@@ -25,17 +29,16 @@ class BottomSheetFragment: BottomSheetDialogFragment(){
             phone = ""
         ),
     )
-
+    private var skeletonScreen: SkeletonScreen? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.activity_hotline_bottom_sheet,container,false)
+        val view: View = inflater.inflate(R.layout.activity_hotline_bottom_sheet, container, false)
         return view
     }
 
-    //buat tambahin button click listener di dalam di bottom sheet
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,22 +50,26 @@ class BottomSheetFragment: BottomSheetDialogFragment(){
 
         val close = view.findViewById<ImageView>(R.id.Image_X)
 
-                close.setOnClickListener {
+        close.setOnClickListener {
             this@BottomSheetFragment.dismiss()
         }
 
+        val recyclerView = view.findViewById<RecyclerView>(R.id.rvhotline)
+        skeletonScreen = Skeleton.bind(recyclerView)
+            .adapter(hotlineAdapter)
+            .load(R.layout.hotline_view_skeleton)
+            .count(7)
+            .show()
 
         val request: Request = Request.Builder()
-            .url("https://bncc-corona-versus.firebaseio.com/v1/hotlines.json")
+            .url(ApiUrl.HOTLINES_API_URL)
             .build()
-        //new call buat request yang di prepare sama okhttp dan enqueue buat jalanin
         okHttpClient.newCall(request).enqueue(getCallback(hotlineAdapter))
     }
+
     private fun getCallback(hotlineAdapter: HotlineAdapter): Callback {
-        //object buat bikin class dari interface
         return object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-               //pake activity krn fragment attach di activity
                 this@BottomSheetFragment.activity?.runOnUiThread() {
                     Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                 }
@@ -87,6 +94,7 @@ class BottomSheetFragment: BottomSheetDialogFragment(){
                         )
                     }
                     this@BottomSheetFragment.activity?.runOnUiThread {
+                        skeletonScreen?.hide()
                         hotlineAdapter.updateData(hotlineListFromNetwork)
                     }
 
@@ -98,5 +106,5 @@ class BottomSheetFragment: BottomSheetDialogFragment(){
 
             }
         }
-     }
     }
+}

@@ -117,7 +117,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/rubik_bold"
-                    android:text="36977"
+                    tools:text="36977"
                     android:textColor="@color/White"
                     android:textSize="20sp" />
 
@@ -161,7 +161,7 @@
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/rubik_bold"
                     android:gravity="center"
-                    android:text="45401"
+                    tools:text="45401"
                     android:textColor="@color/White"
                     android:textSize="20sp" />
 
@@ -201,7 +201,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
                     android:fontFamily="@font/rubik_bold"
-                    android:text="4143"
+                    tools:text="4143"
                     android:textColor="@color/White"
                     android:textSize="20sp" />
 

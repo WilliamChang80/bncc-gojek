@@ -19,7 +19,7 @@ import java.io.IOException
 
 class HotlineActivity : AppCompatActivity() {
 
-    private var skeletonScreen: SkeletonScreen? = null
+
     private val mockHotlineList = mutableListOf(
         Hotline(
             name = "Loading...",
@@ -36,7 +36,6 @@ class HotlineActivity : AppCompatActivity() {
         val hotlineAdapter = HotlineAdapter(mockHotlineList)
         rvhotline.layoutManager = LinearLayoutManager(this)
         rvhotline.adapter = hotlineAdapter
-
 
         val request: Request = Request.Builder()
             .url(HOTLINES_API_URL)
