@@ -1,10 +1,12 @@
 package com.example.byevirus.activity
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -32,6 +34,7 @@ class LookupActivity : AppCompatActivity(), LookupContract.View {
     private lateinit var lookupAdapter: LookUpAdapter
     private lateinit var presenter: LookupPresenter
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_look_up)
@@ -70,6 +73,20 @@ class LookupActivity : AppCompatActivity(), LookupContract.View {
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
+        })
+
+        textEdit.setOnTouchListener(object : View.OnTouchListener {
+            @SuppressLint("ClickableViewAccessibility")
+            override fun onTouch(p0: View?, event: MotionEvent?): Boolean {
+                if (event?.action == MotionEvent.ACTION_UP) {
+                    if (event.rawX >= textEdit.right - textEdit.totalPaddingRight) {
+                        textEdit.setText("")
+                        return true
+                    }
+                }
+                return false
+            }
+
         })
     }
 
