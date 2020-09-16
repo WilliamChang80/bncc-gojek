@@ -12,7 +12,5 @@ class LookUpViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.Label_recovered.text = data.numberOfRecoveredCases
         itemView.Label_confirmed.text = data.numberOfPositiveCases
         itemView.Label_death.text = data.numberOfDeathCases
-        //kl misalnya mau dijadiin string bisa dengan ini
-        //itemView.Label_recovered.text = "${data.numberOfRecoveredCases}"
     }
 }

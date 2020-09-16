@@ -4,17 +4,20 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.byevirus.model.Hotline
+import androidx.recyclerview.widget.RecyclerView
+import com.ethanhua.skeleton.Skeleton
+import com.ethanhua.skeleton.SkeletonScreen
 import com.example.byevirus.R
-import kotlinx.android.synthetic.main.activity_hotline_bottom_sheet.*
 import com.example.byevirus.adapter.HotlineAdapter
 import com.example.byevirus.constants.ApiUrl.Companion.HOTLINES_API_URL
+import com.example.byevirus.model.Hotline
+import kotlinx.android.synthetic.main.activity_hotline_bottom_sheet.*
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
 
-class HotlineActivity: AppCompatActivity() {
 
+class HotlineActivity : AppCompatActivity() {
 
 
     private val mockHotlineList = mutableListOf(
@@ -34,10 +37,8 @@ class HotlineActivity: AppCompatActivity() {
         rvhotline.layoutManager = LinearLayoutManager(this)
         rvhotline.adapter = hotlineAdapter
 
-
-
         val request: Request = Request.Builder()
-            .url(HOTLINES_API_URL )
+            .url(HOTLINES_API_URL)
             .build()
         //new call buat request yang di prepare sama okhttp dan enqueue buat jalanin
         okHttpClient.newCall(request).enqueue(getCallback(hotlineAdapter))
@@ -85,4 +86,4 @@ class HotlineActivity: AppCompatActivity() {
         }
     }
 
-    }
+}

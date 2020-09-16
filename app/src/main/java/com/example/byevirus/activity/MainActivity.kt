@@ -7,6 +7,8 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.ethanhua.skeleton.Skeleton
+import com.ethanhua.skeleton.SkeletonScreen
 import com.example.byevirus.fragment.BottomSheetFragment
 import com.example.byevirus.R
 import com.example.byevirus.constants.ApiUrl.Companion.HOMEPAGE_API_URL
@@ -18,19 +20,13 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
 
-    //buat mastiin key tidak berbeda atau tetep sama, seperti static variabel
-
-
     private val okHttpClient = OkHttpClient()
 
-    private val mockHomeList = mutableListOf(
-        TotalCase(
-            hospitalize = "Loading...",
-            positive = " ",
-            recovered = " ",
-            death = " "
-        ),
-    )
+    lateinit var skeletonScreen: SkeletonScreen
+    lateinit var caseSkeletonScreen: SkeletonScreen
+    lateinit var positiveSkeletonScreen: SkeletonScreen
+    lateinit var deathSkeletonScreen: SkeletonScreen
+    lateinit var recoveredSkeletonScreen: SkeletonScreen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,21 +40,31 @@ class MainActivity : AppCompatActivity() {
         val request: Request = Request.Builder()
             .url(HOMEPAGE_API_URL)
             .build()
-        //new call buat request yang di prepare sama okhttp dan enqueue buat jalanin
+
+        val titleSkeletonView = findViewById<TextView>(R.id.TextView_Indonesia)
+        val caseSkeletonView = findViewById<TextView>(R.id.TextView_Jumlah)
+        val positiveSkeletonView = findViewById<TextView>(R.id.TextView_Number_positive)
+        val deathSkeletonView = findViewById<TextView>(R.id.TextView_Number_death)
+        val recoveredSkeletonView = findViewById<TextView>(R.id.TextView_Number_recovered)
+
+        skeletonScreen = Skeleton.bind(titleSkeletonView).load(R.layout.title_skeleton).show()
+        caseSkeletonScreen = Skeleton.bind(caseSkeletonView).load(R.layout.case_skeleton).show()
+        positiveSkeletonScreen = Skeleton.bind(positiveSkeletonView).load(R.layout.possitive_case_skeleton).show()
+        recoveredSkeletonScreen = Skeleton.bind(recoveredSkeletonView).load(R.layout.recovered_case_skeleton).show()
+        deathSkeletonScreen = Skeleton.bind(deathSkeletonView).load(R.layout.death_case_skeleton).show()
+
         okHttpClient.newCall(request).enqueue(getCallback())
 
-        //klik arrow 1 LOOk UP
         arrow1.setOnClickListener {
             openSecondPage()
         }
-        // klik arrow 2 hotline
         arrow2.setOnClickListener {
             bottomSheetFragment.show(supportFragmentManager, "bottomSheetDialog")
         }
 
 
-
     }
+
     private fun getCallback(): Callback {
         return object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -74,9 +80,10 @@ class MainActivity : AppCompatActivity() {
                     val homeListFromNetwork: MutableList<TotalCase> = mutableListOf<TotalCase>()
                     Log.d("msg", "hayo")
 
-                    for (i in 0 until jsonArray.length()){
+                    for (i in 0 until jsonArray.length()) {
                         homeListFromNetwork.add(
                             TotalCase(
+                                country = jsonArray.getJSONObject(i).getString("name"),
                                 hospitalize = jsonArray.getJSONObject(i).getString("positif"),
                                 positive = jsonArray.getJSONObject(i).getString("dirawat"),
                                 recovered = jsonArray.getJSONObject(i).getString("sembuh"),
@@ -85,15 +92,25 @@ class MainActivity : AppCompatActivity() {
                         )
                     }
                     this@MainActivity.runOnUiThread {
-                        findViewById<TextView>(R.id.TextView_Jumlah).text = homeListFromNetwork.get(0).hospitalize
-                        findViewById<TextView>(R.id.TextView_Number_positive).text = homeListFromNetwork.get(0).positive
-                        findViewById<TextView>(R.id.TextView_Number_recovered).text = homeListFromNetwork.get(0).recovered
-                        findViewById<TextView>(R.id.TextView_Number_death).text = homeListFromNetwork.get(0).death
-//                        lookUpAdapter.updateData(lookUpListFromNetwork)
+                        skeletonScreen.hide()
+                        caseSkeletonScreen.hide()
+                        positiveSkeletonScreen.hide()
+                        recoveredSkeletonScreen.hide()
+                        deathSkeletonScreen.hide()
+
+                        findViewById<TextView>(R.id.TextView_Jumlah).text =
+                            homeListFromNetwork[0].hospitalize
+                        findViewById<TextView>(R.id.TextView_Number_positive).text =
+                            homeListFromNetwork[0].positive
+                        findViewById<TextView>(R.id.TextView_Number_recovered).text =
+                            homeListFromNetwork[0].recovered
+                        findViewById<TextView>(R.id.TextView_Number_death).text =
+                            homeListFromNetwork[0].death
+                        findViewById<TextView>(R.id.TextView_Indonesia).text =
+                            homeListFromNetwork[0].country
                     }
-                }
-                catch (e : Exception){
-                    this@MainActivity.runOnUiThread{
+                } catch (e: Exception) {
+                    this@MainActivity.runOnUiThread {
                         Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -103,12 +120,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openSecondPage() {
-        val intent = Intent(this, LookUpActivity::class.java).apply {
+        val intent = Intent(this, LookupActivity::class.java).apply {
             putExtra("extra", "This is from main activity")
         }
         startActivity(intent)
     }
-
-
 
 }
