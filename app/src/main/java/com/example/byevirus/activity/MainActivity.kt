@@ -3,7 +3,6 @@ package com.example.byevirus.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -12,7 +11,7 @@ import com.ethanhua.skeleton.SkeletonScreen
 import com.example.byevirus.fragment.BottomSheetFragment
 import com.example.byevirus.R
 import com.example.byevirus.constants.ApiUrl.Companion.HOMEPAGE_API_URL
-import com.example.byevirus.model.TotalCase
+import com.example.byevirus.entity.TotalCase
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
@@ -78,8 +77,6 @@ class MainActivity : AppCompatActivity() {
                     val jsonString: String? = response.body?.string()
                     val jsonArray = JSONArray(jsonString)
                     val homeListFromNetwork: MutableList<TotalCase> = mutableListOf<TotalCase>()
-                    Log.d("msg", "hayo")
-
                     for (i in 0 until jsonArray.length()) {
                         homeListFromNetwork.add(
                             TotalCase(
