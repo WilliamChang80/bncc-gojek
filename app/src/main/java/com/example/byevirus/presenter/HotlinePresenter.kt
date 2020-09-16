@@ -1,8 +1,5 @@
 package com.example.byevirus.presenter
 
-import android.util.Log
-import android.widget.Toast
-import com.example.byevirus.adapter.HotlineAdapter
 import com.example.byevirus.contract.HotlineContract
 import com.example.byevirus.entity.Hotline
 import com.example.byevirus.model.HotlineModel

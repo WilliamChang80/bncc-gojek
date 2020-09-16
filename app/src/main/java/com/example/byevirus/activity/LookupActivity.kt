@@ -32,15 +32,15 @@ class LookupActivity : AppCompatActivity(), LookupContract.View {
 
     private lateinit var skeletonScreen: SkeletonScreen
     private lateinit var lookupAdapter: LookUpAdapter
-    private lateinit var presenter: LookupPresenter
+    private lateinit var lookupPresenter: LookupPresenter
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_look_up)
-        presenter = LookupPresenter(LookupModel(), this)
+        lookupPresenter = LookupPresenter(LookupModel(), this)
         runOnUiThread {
-            presenter.getData()
+            lookupPresenter.getData()
         }
         val arrowClickBack = findViewById<ImageView>(R.id.ImageView_back)
         arrowClickBack.setOnClickListener {
@@ -63,7 +63,7 @@ class LookupActivity : AppCompatActivity(), LookupContract.View {
         textEdit.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(text: Editable?) {
                 startLoading()
-                presenter.filterData(text.toString())
+                lookupPresenter.filterData(text.toString())
             }
 
             override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
