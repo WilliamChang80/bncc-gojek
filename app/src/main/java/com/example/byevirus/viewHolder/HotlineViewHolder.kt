@@ -2,7 +2,7 @@ package com.example.byevirus.viewHolder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.byevirus.model.Hotline
+import com.example.byevirus.entity.Hotline
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_hotline.view.*
 

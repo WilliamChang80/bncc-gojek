@@ -1,13 +1,11 @@
 package com.example.byevirus.adapter
 
-import android.util.Log
 import com.example.byevirus.viewHolder.LookUpViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.byevirus.R
-import com.example.byevirus.model.LookUp
-import java.util.logging.Logger
+import com.example.byevirus.entity.LookUp
 
 class LookUpAdapter
     (private val lookUpList: MutableList<LookUp>) : RecyclerView.Adapter<LookUpViewHolder>() {
