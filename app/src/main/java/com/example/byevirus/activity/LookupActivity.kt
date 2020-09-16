@@ -27,7 +27,7 @@ class LookupActivity : AppCompatActivity() {
         const val Lookup = "LookUp"
     }
 
-    private var skeletonScreen: SkeletonScreen? = null
+    lateinit var skeletonScreen: SkeletonScreen
 
     private val okHttpClient = OkHttpClient()
     private lateinit var filteredLookUpList: MutableList<LookUp>
@@ -40,6 +40,7 @@ class LookupActivity : AppCompatActivity() {
             numberOfDeathCases = " "
         ),
     )
+
     fun filterData(search: String) {
         val f = lookupList.filter { lookUp ->
             lookUp.provinceName.contains(search, true)
@@ -65,6 +66,7 @@ class LookupActivity : AppCompatActivity() {
         textEdit.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(text: Editable?) {
                 filterData(text.toString())
+                skeletonScreen?.hide()
                 lookUpAdapter.updateData(filteredLookUpList)
             }
 
@@ -73,7 +75,7 @@ class LookupActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                skeletonScreen?.show()
             }
 
         })

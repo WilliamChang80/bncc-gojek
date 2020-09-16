@@ -36,11 +36,4 @@ class LookUpAdapter
         notifyDataSetChanged()
     }
 
-    fun filterData(search: String) {
-        val filteredLookupList: List<LookUp> = lookUpList.filter { lookUp ->
-            lookUp.provinceName.contains(search, true)
-        }
-        updateData(filteredLookupList as MutableList<LookUp>)
-    }
-
 }

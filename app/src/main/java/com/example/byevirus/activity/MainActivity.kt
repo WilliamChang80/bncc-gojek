@@ -7,6 +7,8 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.ethanhua.skeleton.Skeleton
+import com.ethanhua.skeleton.SkeletonScreen
 import com.example.byevirus.fragment.BottomSheetFragment
 import com.example.byevirus.R
 import com.example.byevirus.constants.ApiUrl.Companion.HOMEPAGE_API_URL
@@ -20,14 +22,11 @@ class MainActivity : AppCompatActivity() {
 
     private val okHttpClient = OkHttpClient()
 
-    private val mockHomeList = mutableListOf(
-        TotalCase(
-            hospitalize = "Loading...",
-            positive = " ",
-            recovered = " ",
-            death = " "
-        ),
-    )
+    lateinit var skeletonScreen: SkeletonScreen
+    lateinit var caseSkeletonScreen: SkeletonScreen
+    lateinit var positiveSkeletonScreen: SkeletonScreen
+    lateinit var deathSkeletonScreen: SkeletonScreen
+    lateinit var recoveredSkeletonScreen: SkeletonScreen
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +40,18 @@ class MainActivity : AppCompatActivity() {
         val request: Request = Request.Builder()
             .url(HOMEPAGE_API_URL)
             .build()
+
+        val titleSkeletonView = findViewById<TextView>(R.id.TextView_Indonesia)
+        val caseSkeletonView = findViewById<TextView>(R.id.TextView_Jumlah)
+        val positiveSkeletonView = findViewById<TextView>(R.id.TextView_Number_positive)
+        val deathSkeletonView = findViewById<TextView>(R.id.TextView_Number_death)
+        val recoveredSkeletonView = findViewById<TextView>(R.id.TextView_Number_recovered)
+
+        skeletonScreen = Skeleton.bind(titleSkeletonView).load(R.layout.title_skeleton).show()
+        caseSkeletonScreen = Skeleton.bind(caseSkeletonView).load(R.layout.case_skeleton).show()
+        positiveSkeletonScreen = Skeleton.bind(positiveSkeletonView).load(R.layout.possitive_case_skeleton).show()
+        recoveredSkeletonScreen = Skeleton.bind(recoveredSkeletonView).load(R.layout.recovered_case_skeleton).show()
+        deathSkeletonScreen = Skeleton.bind(deathSkeletonView).load(R.layout.death_case_skeleton).show()
 
         okHttpClient.newCall(request).enqueue(getCallback())
 
@@ -72,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()) {
                         homeListFromNetwork.add(
                             TotalCase(
+                                country = jsonArray.getJSONObject(i).getString("name"),
                                 hospitalize = jsonArray.getJSONObject(i).getString("positif"),
                                 positive = jsonArray.getJSONObject(i).getString("dirawat"),
                                 recovered = jsonArray.getJSONObject(i).getString("sembuh"),
@@ -80,14 +92,22 @@ class MainActivity : AppCompatActivity() {
                         )
                     }
                     this@MainActivity.runOnUiThread {
+                        skeletonScreen.hide()
+                        caseSkeletonScreen.hide()
+                        positiveSkeletonScreen.hide()
+                        recoveredSkeletonScreen.hide()
+                        deathSkeletonScreen.hide()
+
                         findViewById<TextView>(R.id.TextView_Jumlah).text =
-                            homeListFromNetwork.get(0).hospitalize
+                            homeListFromNetwork[0].hospitalize
                         findViewById<TextView>(R.id.TextView_Number_positive).text =
-                            homeListFromNetwork.get(0).positive
+                            homeListFromNetwork[0].positive
                         findViewById<TextView>(R.id.TextView_Number_recovered).text =
-                            homeListFromNetwork.get(0).recovered
+                            homeListFromNetwork[0].recovered
                         findViewById<TextView>(R.id.TextView_Number_death).text =
-                            homeListFromNetwork.get(0).death
+                            homeListFromNetwork[0].death
+                        findViewById<TextView>(R.id.TextView_Indonesia).text =
+                            homeListFromNetwork[0].country
                     }
                 } catch (e: Exception) {
                     this@MainActivity.runOnUiThread {

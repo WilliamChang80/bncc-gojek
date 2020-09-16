@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/rubik_bold"
-        android:text="@string/indonesia"
+        tools:text="@string/indonesia"
         android:textColor="@color/White"
         android:textSize="20sp"
         android:textStyle="bold"
