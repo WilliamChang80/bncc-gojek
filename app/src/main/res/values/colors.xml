@@ -12,4 +12,5 @@
     <color name="Teal">#52B2D0</color>
     <color name="OffWhite">#F1f1f1</color>
     <color name="White">#FFFFFF</color>
+    <color name="round">#eeeeff</color>
 </resources>
