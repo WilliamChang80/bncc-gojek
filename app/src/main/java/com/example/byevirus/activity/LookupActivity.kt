@@ -68,7 +68,7 @@ class LookUpActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java).apply {
             putExtra(Lookup, "this is from look up activity")
         }
-        finish()
+        startActivity(intent)
     }
 
     private fun getCallback(lookUpAdapter: LookUpAdapter): Callback {
