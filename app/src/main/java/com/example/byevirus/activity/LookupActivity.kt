@@ -39,25 +39,38 @@ class LookupActivity : AppCompatActivity(), LookupContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_look_up)
         lookupPresenter = LookupPresenter(LookupModel(), this)
-        runOnUiThread {
-            lookupPresenter.getData()
-        }
-        val arrowClickBack = findViewById<ImageView>(R.id.ImageView_back)
-        arrowClickBack.setOnClickListener {
-            backToMainPage()
-        }
+        initializeAdapter()
+        initializeBackButton()
+        initializeLoadingComponents()
+        initializeTextEdit()
+        lookupPresenter.getData()
+    }
 
+    private fun initializeAdapter() {
         val initialLookupList: MutableList<LookUp> = mutableListOf()
         lookupAdapter = LookUpAdapter(initialLookupList)
         rvlookup.layoutManager = LinearLayoutManager(this)
         rvlookup.adapter = lookupAdapter
+    }
 
+    private fun initializeBackButton() {
+        val arrowClickBack = findViewById<ImageView>(R.id.ImageView_back)
+        arrowClickBack.setOnClickListener {
+            backToMainPage()
+        }
+    }
+
+    private fun initializeLoadingComponents() {
         val recyclerView = findViewById<RecyclerView>(R.id.rvlookup)
         skeletonScreen = Skeleton.bind(recyclerView)
             .adapter(lookupAdapter)
             .load(R.layout.lookup_view_skeleton)
             .count(NUMBER_OF_LOADING_ITEMS)
             .show()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initializeTextEdit() {
 
         val textEdit = findViewById<EditText>(R.id.Search)
         textEdit.addTextChangedListener(object : TextWatcher {
@@ -76,7 +89,6 @@ class LookupActivity : AppCompatActivity(), LookupContract.View {
         })
 
         textEdit.setOnTouchListener(object : View.OnTouchListener {
-            @SuppressLint("ClickableViewAccessibility")
             override fun onTouch(p0: View?, event: MotionEvent?): Boolean {
                 if (event?.action == MotionEvent.ACTION_UP) {
                     if (event.rawX >= textEdit.right - textEdit.totalPaddingRight) {

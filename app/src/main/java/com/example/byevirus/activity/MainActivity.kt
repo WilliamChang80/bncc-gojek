@@ -10,13 +10,16 @@ import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
 import com.example.byevirus.fragment.BottomSheetFragment
 import com.example.byevirus.R
+import com.example.byevirus.constants.FragmentTag
 import com.example.byevirus.contract.TotalCaseContract
 import com.example.byevirus.entity.TotalCase
+import com.example.byevirus.fragment.DialogAboutFragment
 import com.example.byevirus.model.TotalCaseModel
 import com.example.byevirus.presenter.TotalCasePresenter
 
 
 class MainActivity : AppCompatActivity(), TotalCaseContract.View {
+
 
     lateinit var titleSkeletonScreen: SkeletonScreen
     lateinit var caseSkeletonScreen: SkeletonScreen
@@ -29,10 +32,25 @@ class MainActivity : AppCompatActivity(), TotalCaseContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         totalCasePresenter = TotalCasePresenter(TotalCaseModel(), this)
-        val bottomSheetFragment = BottomSheetFragment()
+        initializeArrowButtonAndBottomFragment()
+        initializeAboutFragment()
+        initializeLoadingComponents()
+        totalCasePresenter.getData()
+    }
+
+    private fun initializeArrowButtonAndBottomFragment() {
         val activityArrow = findViewById<ImageView>(R.id.Image_arrow)
         val hotlineArrow = findViewById<ImageView>(R.id.Image_arrow2)
+        val bottomSheetFragment = BottomSheetFragment()
+        activityArrow.setOnClickListener {
+            openLookupActivity()
+        }
+        hotlineArrow.setOnClickListener {
+            bottomSheetFragment.show(supportFragmentManager, FragmentTag.BOTTOM_SHEET_TAG)
+        }
+    }
 
+    private fun initializeLoadingComponents() {
         val titleSkeletonView = findViewById<TextView>(R.id.TextView_Indonesia)
         val caseSkeletonView = findViewById<TextView>(R.id.TextView_Jumlah)
         val positiveSkeletonView = findViewById<TextView>(R.id.TextView_Number_positive)
@@ -47,14 +65,15 @@ class MainActivity : AppCompatActivity(), TotalCaseContract.View {
             Skeleton.bind(recoveredSkeletonView).load(R.layout.recovered_case_skeleton).show()
         deathSkeletonScreen =
             Skeleton.bind(deathSkeletonView).load(R.layout.death_case_skeleton).show()
+    }
 
-        activityArrow.setOnClickListener {
-            openLookupActivity()
+    private fun initializeAboutFragment() {
+        val aboutBtn = findViewById<ImageView>(R.id.Image_info)
+        val aboutFragment = DialogAboutFragment()
+
+        aboutBtn.setOnClickListener {
+            aboutFragment.show(supportFragmentManager, "bottomSheetDialog")
         }
-        hotlineArrow.setOnClickListener {
-            bottomSheetFragment.show(supportFragmentManager, "bottomSheetDialog")
-        }
-        totalCasePresenter.getData()
     }
 
 

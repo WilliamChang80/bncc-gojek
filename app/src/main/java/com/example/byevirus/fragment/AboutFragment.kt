@@ -1,23 +1,34 @@
 package com.example.byevirus.fragment
 
-import androidx.appcompat.app.AppCompatActivity
+import android.media.Image
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.fragment.app.DialogFragment
 import com.example.byevirus.R
 
-class AboutFragment : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about_pop)
+class DialogAboutFragment : DialogFragment() {
 
-        val dm = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(dm)
-
-        val width = dm.widthPixels
-        val height = dm.heightPixels
-
-        window.setLayout((width*.8).toInt(),(height*.7).toInt())
-        window.setGravity(Gravity.CENTER_HORIZONTAL)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view: View = inflater.inflate(R.layout.activity_about_pop,container,false)
+        return view
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val closeFr = view.findViewById<ImageView>(R.id.close_fragment)
+        closeFr.setOnClickListener {
+            this@DialogAboutFragment.dismiss()
+        }
+
+    }
+
+
 }
