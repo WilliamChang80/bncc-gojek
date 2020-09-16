@@ -4,7 +4,7 @@ import com.example.byevirus.viewHolder.HotlineViewHolder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.byevirus.model.Hotline
+import com.example.byevirus.entity.Hotline
 import com.example.byevirus.R
 
 class HotlineAdapter(private val hotlineList: MutableList<Hotline>) :
