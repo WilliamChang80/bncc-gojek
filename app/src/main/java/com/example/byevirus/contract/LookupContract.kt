@@ -14,8 +14,4 @@ interface LookupContract {
         fun getData()
         fun filterData(search: String)
     }
-
-    interface Repository {
-        fun getData(): List<LookUp>
-    }
 }

@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 try {
                     val jsonString: String? = response.body?.string()
                     val jsonArray = JSONArray(jsonString)
-                    val homeListFromNetwork: MutableList<TotalCase> = mutableListOf<TotalCase>()
+                    val homeListFromNetwork: MutableList<TotalCase> = mutableListOf()
                     for (i in 0 until jsonArray.length()) {
                         homeListFromNetwork.add(
                             TotalCase(
