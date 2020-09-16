@@ -2,6 +2,9 @@ package com.example.byevirus.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +29,9 @@ class LookupActivity : AppCompatActivity() {
 
     private var skeletonScreen: SkeletonScreen? = null
 
+    private val okHttpClient = OkHttpClient()
+    private lateinit var filteredLookUpList: MutableList<LookUp>
+    private lateinit var lookupList: MutableList<LookUp>
     private val mockLookUpList = mutableListOf(
         LookUp(
             provinceName = "Loading...",
@@ -34,18 +40,44 @@ class LookupActivity : AppCompatActivity() {
             numberOfDeathCases = " "
         ),
     )
-
-    private val okHttpClient = OkHttpClient()
+    fun filterData(search: String) {
+        val f = lookupList.filter { lookUp ->
+            lookUp.provinceName.contains(search, true)
+        }
+        filteredLookUpList = f as MutableList<LookUp>
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_look_up)
 
-        val arrow_click_back = findViewById<ImageView>(R.id.ImageView_back)
+        val arrowClickBack = findViewById<ImageView>(R.id.ImageView_back)
+
+        arrowClickBack.setOnClickListener {
+            backToMainPage()
+        }
 
         val lookUpAdapter = LookUpAdapter(mockLookUpList)
         rvlookup.layoutManager = LinearLayoutManager(this)
         rvlookup.adapter = lookUpAdapter
+
+        val textEdit = findViewById<EditText>(R.id.Search)
+        textEdit.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(text: Editable?) {
+                filterData(text.toString())
+                lookUpAdapter.updateData(filteredLookUpList)
+            }
+
+            override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+        })
+
         val recyclerView = findViewById<RecyclerView>(R.id.rvlookup)
         skeletonScreen = Skeleton.bind(recyclerView)
             .adapter(lookUpAdapter)
@@ -53,9 +85,6 @@ class LookupActivity : AppCompatActivity() {
             .count(7)
             .show()
 
-        arrow_click_back.setOnClickListener {
-            backToMainPage()
-        }
         val request: Request = Request.Builder()
             .url(LOOKUP_API_URL)
             .build()
@@ -97,7 +126,9 @@ class LookupActivity : AppCompatActivity() {
                     }
                     this@LookupActivity.runOnUiThread {
                         skeletonScreen?.hide()
-                        lookUpAdapter.updateData(lookUpListFromNetwork)
+                        lookupList = lookUpListFromNetwork
+                        filteredLookUpList = lookUpListFromNetwork
+                        lookUpAdapter.updateData(filteredLookUpList)
                     }
                 } catch (e: Exception) {
                     this@LookupActivity.runOnUiThread {
