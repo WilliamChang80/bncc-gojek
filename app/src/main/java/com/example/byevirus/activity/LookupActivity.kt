@@ -2,9 +2,6 @@ package com.example.byevirus.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,16 +19,14 @@ import org.json.JSONArray
 import java.io.IOException
 import java.lang.Exception
 
-class LookupActivity : AppCompatActivity() {
+//mutable list lebih multiplatform ketimbang array
+class LookUpActivity : AppCompatActivity() {
     companion object {
         const val Lookup = "LookUp"
     }
 
-    lateinit var skeletonScreen: SkeletonScreen
+    private var skeletonScreen: SkeletonScreen? = null
 
-    private val okHttpClient = OkHttpClient()
-    private lateinit var filteredLookUpList: MutableList<LookUp>
-    private lateinit var lookupList: MutableList<LookUp>
     private val mockLookUpList = mutableListOf(
         LookUp(
             provinceName = "Loading...",
@@ -41,45 +36,17 @@ class LookupActivity : AppCompatActivity() {
         ),
     )
 
-    fun filterData(search: String) {
-        val f = lookupList.filter { lookUp ->
-            lookUp.provinceName.contains(search, true)
-        }
-        filteredLookUpList = f as MutableList<LookUp>
-    }
+    private val okHttpClient = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_look_up)
 
-        val arrowClickBack = findViewById<ImageView>(R.id.ImageView_back)
-
-        arrowClickBack.setOnClickListener {
-            backToMainPage()
-        }
+        val arrow_click_back = findViewById<ImageView>(R.id.ImageView_back)
 
         val lookUpAdapter = LookUpAdapter(mockLookUpList)
         rvlookup.layoutManager = LinearLayoutManager(this)
         rvlookup.adapter = lookUpAdapter
-
-        val textEdit = findViewById<EditText>(R.id.Search)
-        textEdit.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(text: Editable?) {
-                filterData(text.toString())
-                skeletonScreen?.hide()
-                lookUpAdapter.updateData(filteredLookUpList)
-            }
-
-            override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                skeletonScreen?.show()
-            }
-
-        })
-
         val recyclerView = findViewById<RecyclerView>(R.id.rvlookup)
         skeletonScreen = Skeleton.bind(recyclerView)
             .adapter(lookUpAdapter)
@@ -87,6 +54,9 @@ class LookupActivity : AppCompatActivity() {
             .count(7)
             .show()
 
+        arrow_click_back.setOnClickListener {
+            backToMainPage()
+        }
         val request: Request = Request.Builder()
             .url(LOOKUP_API_URL)
             .build()
@@ -98,14 +68,14 @@ class LookupActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java).apply {
             putExtra(Lookup, "this is from look up activity")
         }
-        startActivity(intent)
+        finish()
     }
 
     private fun getCallback(lookUpAdapter: LookUpAdapter): Callback {
         return object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                this@LookupActivity.runOnUiThread {
-                    Toast.makeText(this@LookupActivity, e.message, Toast.LENGTH_SHORT).show()
+                this@LookUpActivity.runOnUiThread {
+                    Toast.makeText(this@LookUpActivity, e.message, Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -126,18 +96,25 @@ class LookupActivity : AppCompatActivity() {
                             )
                         )
                     }
-                    this@LookupActivity.runOnUiThread {
+                    this@LookUpActivity.runOnUiThread {
                         skeletonScreen?.hide()
-                        lookupList = lookUpListFromNetwork
-                        filteredLookUpList = lookUpListFromNetwork
-                        lookUpAdapter.updateData(filteredLookUpList)
+                        lookUpAdapter.updateData(lookUpListFromNetwork)
                     }
                 } catch (e: Exception) {
-                    this@LookupActivity.runOnUiThread {
-                        Toast.makeText(this@LookupActivity, e.message, Toast.LENGTH_SHORT).show()
+                    this@LookUpActivity.runOnUiThread {
+                        Toast.makeText(this@LookUpActivity, e.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
     }
+
+
 }
+
+
+
+
+
+
+

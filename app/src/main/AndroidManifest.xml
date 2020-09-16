@@ -12,23 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".splashScreen"/>
-        <activity android:name=".activity.LookupActivity" />
-
-        <activity android:name=".activity.HotlineActivity" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HotlineBottomSheet" />
-        <activity android:name=".SecondPage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.LookUpActivity" />
 
-        </activity>
-
+        <activity android:name=".activity.HotlineActivity" />
+        <activity android:name=".activity.MainActivity"/>
 
     </application>
 

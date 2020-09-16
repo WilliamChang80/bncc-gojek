@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openSecondPage() {
-        val intent = Intent(this, LookupActivity::class.java).apply {
+        val intent = Intent(this, LookUpActivity::class.java).apply {
             putExtra("extra", "This is from main activity")
         }
         startActivity(intent)
