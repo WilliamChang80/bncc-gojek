@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/Indigo">
+    android:background="@color/Indigo"
+    >
 
     <TextView
         android:id="@+id/TextView_Indonesia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
         android:fontFamily="@font/rubik_bold"
         android:text="@string/indonesia"
         android:textColor="@color/White"
         android:textSize="20sp"
         android:textStyle="bold"
-
-        />
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/Image_info"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
         android:layout_alignTop="@id/TextView_Indonesia"
-        android:layout_alignRight="@id/TextView_Indonesia"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="25dp"
-        android:src="@drawable/info" />
+        android:src="@drawable/info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        />
 
     <LinearLayout
         android:id="@+id/LinearLayout_Header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/TextView_Indonesia"
-        android:orientation="horizontal">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_Indonesia">
 
         <ImageView
             android:id="@+id/Image_Corona"
@@ -62,14 +69,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginRight="25dp"
                 android:fontFamily="@font/rubik_bold"
-                tools:text="89076"
                 android:textColor="@color/White"
-                android:textSize="50sp"
+                android:textSize="46sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="89076" />
 
             <TextView
                 android:id="@+id/TextView_Pasien"
@@ -86,286 +94,298 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayout_white_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/LinearLayout_Header"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/round_background">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/RelativeLayout_white_background"
+            android:layout_width="match_parent"
+            android:layout_height="530dp"
+            android:background="@drawable/round_background"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/LinearLayout_Header"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            >
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/Card_Positive"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="18dp">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Card_Positive"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="8dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="18dp"
+                app:layout_constraintEnd_toStartOf="@+id/Card_Recovered"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/RelativeLayout_white_background">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/round_positive"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/TextView_Number_positive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:fontFamily="@font/rubik_bold"
-                    android:text="36977"
-                    android:textColor="@color/White"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/TextView_positive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/karla"
-                    android:text="Positive"
-                    android:textColor="@color/White"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/Card_Recovered"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="15dp"
-            android:layout_toLeftOf="@id/Card_Death"
-            android:layout_toRightOf="@id/Card_Positive"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="18dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/round_recovered"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/TextView_Number_recovered"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:fontFamily="@font/rubik_bold"
-                    android:gravity="center"
-                    android:text="45401"
-                    android:textColor="@color/White"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/TextView_recovered"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/karla"
-                    android:text="Recovered"
-                    android:textColor="@color/White"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/Card_Death"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="25dp"
-            android:layout_marginRight="25dp"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="18dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/round_death"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/TextView_Number_death"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:fontFamily="@font/rubik_bold"
-                    android:text="4143"
-                    android:textColor="@color/White"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/TextView_death"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Death"
-                    android:fontFamily="@font/karla"
-                    android:textColor="@color/White"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-
-
-
-
-        <TextView
-            android:id="@+id/TextView_Get_to_Know_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Card_Positive"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/rubik_bold"
-            android:text="Get to know more"
-            android:textColor="@color/Indigo2"
-            android:textSize="20sp" />
-
-        <LinearLayout
-            android:id="@+id/LinearLayout_Look_up"
-            android:layout_width="wrap_content"
-            android:layout_height="110dp"
-            android:layout_below="@id/TextView_Get_to_Know_more"
-            android:layout_alignStart="@id/TextView_Get_to_Know_more"
-            android:layout_alignEnd="@id/Card_Death"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/round_2"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/Image_location"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp"
-                android:src="@drawable/location" />
-
-            <LinearLayout
-                android:id="@+id/Linear_text"
-                android:layout_width="145dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/Text_lookup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/rubik_bold"
-                    android:text="Look Up"
-                    android:textColor="@color/Indigo2"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/Text_lookup_desc"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:fontFamily="@font/karla"
-                    android:text="See details by province all over Indonesia"
-                    android:textColor="@color/GreyishBrown"
-                    android:textSize="12sp" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_positive"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/TextView_Number_positive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/rubik_bold"
+                        android:text="36977"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
 
-            <ImageView
-                android:id="@+id/Image_arrow"
-                android:layout_width="36dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp"
-                android:src="@drawable/ic_baseline_chevron_right_24" />
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/TextView_positive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/karla"
+                        android:text="Positive"
+                        android:textColor="@color/White"
+                        android:textSize="16sp" />
 
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/LinearLayout_Hotline"
-            android:layout_width="wrap_content"
-            android:layout_height="110dp"
-            android:layout_below="@id/LinearLayout_Look_up"
-            android:layout_alignStart="@id/LinearLayout_Look_up"
-            android:layout_alignEnd="@id/LinearLayout_Look_up"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/round_2"
-            android:orientation="horizontal">
+            </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Card_Recovered"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="24dp"
+                android:layout_toLeftOf="@id/Card_Death"
+                android:layout_toRightOf="@id/Card_Positive"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/Image_alert"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp"
-                android:src="@drawable/alert" />
+                <LinearLayout
+                    android:layout_width="112dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_recovered"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TextView_Number_recovered"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/rubik_bold"
+                        android:gravity="center"
+                        android:text="45401"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/TextView_recovered"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/karla"
+                        android:text="Recovered"
+                        android:textColor="@color/White"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Card_Death"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="8dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/Card_Recovered"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_death"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TextView_Number_death"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/rubik_bold"
+                        android:text="4143"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/TextView_death"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/karla"
+                        android:text="Death"
+                        android:textColor="@color/White"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+    <!--        segment-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="367dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Card_Positive">
+
+            <TextView
+                android:id="@+id/TextView_Get_to_Know_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rubik_bold"
+                android:text="Get to know more"
+                android:textColor="@color/Indigo2"
+                android:textSize="20sp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
             <LinearLayout
-                android:id="@+id/Linear_text2"
-                android:layout_width="145dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp"
-                android:orientation="vertical">
+                android:id="@+id/LinearLayout_Look_up"
+                android:layout_width="wrap_content"
+                android:layout_height="110dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/round_2"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextView_Get_to_Know_more">
 
-                <TextView
-                    android:id="@+id/Text_Hotline"
-                    android:layout_width="wrap_content"
+                            <ImageView
+                                android:id="@+id/Image_location"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginTop="25dp"
+                                android:layout_marginEnd="25dp"
+                                android:layout_marginBottom="25dp"
+                                android:src="@drawable/location" />
+
+                            <LinearLayout
+                                android:id="@+id/Linear_text"
+                                android:layout_width="145dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginTop="25dp"
+                                android:layout_marginEnd="25dp"
+                                android:layout_marginBottom="25dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/Text_lookup"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/rubik_bold"
+                                    android:text="Look Up"
+                                    android:textColor="@color/Indigo2"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/Text_lookup_desc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="@font/karla"
+                                    android:text="See details by province all over Indonesia"
+                                    android:textColor="@color/GreyishBrown"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/Image_arrow"
+                                android:layout_width="36dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="25dp"
+                                android:layout_marginEnd="25dp"
+                                android:layout_marginBottom="25dp"
+                                android:src="@drawable/ic_baseline_chevron_right_24" />
+                        </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/LinearLayout_Hotline"
+                android:layout_width="wrap_content"
+                android:layout_height="110dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/round_2"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LinearLayout_Look_up">
+
+
+                <ImageView
+                    android:id="@+id/Image_alert"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:src="@drawable/alert" />
+
+                <LinearLayout
+                    android:id="@+id/Linear_text2"
+                    android:layout_width="145dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rubik_bold"
-                    android:text="Hotline"
-                    android:textColor="@color/Indigo2"
-                    android:textSize="16sp" />
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/Text_hotline_desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:fontFamily="@font/karla"
-                    android:text="Check emergency number to contact"
-                    android:textColor="@color/GreyishBrown"
-                    android:textSize="12sp" />
+                    <TextView
+                        android:id="@+id/Text_Hotline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/rubik_bold"
+                        android:text="Hotline"
+                        android:textColor="@color/Indigo2"
+                        android:textSize="16sp" />
 
+                    <TextView
+                        android:id="@+id/Text_hotline_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/karla"
+                        android:text="Check emergency number to contact"
+                        android:textColor="@color/GreyishBrown"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/Image_arrow2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:src="@drawable/ic_baseline_chevron_right_24" />
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/Image_arrow2"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginBottom="25dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_chevron_right_24" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </RelativeLayout>
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

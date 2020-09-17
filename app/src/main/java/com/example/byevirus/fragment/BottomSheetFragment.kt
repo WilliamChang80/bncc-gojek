@@ -47,7 +47,7 @@ class BottomSheetFragment: BottomSheetDialogFragment(){
 
         val close = view.findViewById<ImageView>(R.id.Image_X)
 
-                close.setOnClickListener {
+        close.setOnClickListener {
             this@BottomSheetFragment.dismiss()
         }
 

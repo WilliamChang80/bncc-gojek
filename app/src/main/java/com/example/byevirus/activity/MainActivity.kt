@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.byevirus.fragment.BottomSheetFragment
 import com.example.byevirus.R
 import com.example.byevirus.constants.ApiUrl.Companion.HOMEPAGE_API_URL
+import com.example.byevirus.fragment.DialogAboutFragment
 import com.example.byevirus.model.TotalCase
 import okhttp3.*
 import org.json.JSONArray
@@ -36,24 +37,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bottomSheetFragment =
-            BottomSheetFragment()
+        val bottomSheetFragment = BottomSheetFragment()
+        val dialogAboutFragment = DialogAboutFragment()
         val arrow1 = findViewById<ImageView>(R.id.Image_arrow)
         val arrow2 = findViewById<ImageView>(R.id.Image_arrow2)
+        val about = findViewById<ImageView>(R.id.Image_info)
 
         val request: Request = Request.Builder()
             .url(HOMEPAGE_API_URL)
             .build()
-        //new call buat request yang di prepare sama okhttp dan enqueue buat jalanin
         okHttpClient.newCall(request).enqueue(getCallback())
 
         //klik arrow 1 LOOk UP
         arrow1.setOnClickListener {
             openSecondPage()
         }
+
         // klik arrow 2 hotline
         arrow2.setOnClickListener {
             bottomSheetFragment.show(supportFragmentManager, "bottomSheetDialog")
+        }
+
+        about.setOnClickListener {
+            dialogAboutFragment.show(supportFragmentManager,"bottomSheetDialog")
         }
 
 
@@ -72,7 +78,6 @@ class MainActivity : AppCompatActivity() {
                     val jsonString: String? = response.body?.string()
                     val jsonArray = JSONArray(jsonString)
                     val homeListFromNetwork: MutableList<TotalCase> = mutableListOf<TotalCase>()
-                    Log.d("msg", "hayo")
 
                     for (i in 0 until jsonArray.length()){
                         homeListFromNetwork.add(
