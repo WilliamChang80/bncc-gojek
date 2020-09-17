@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Indigo"
+    tools:context=".activity.survey">
+
+    <TextView
+        android:id="@+id/TextView_header"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/White"
+        android:fontFamily="@font/rubik_bold"
+        android:gravity="center"
+        android:text="Cek Resiko Corona"
+        android:textColor="@color/Indigo2"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ImageView_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="24dp"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_header">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/Indigo"
+            android:layout_marginLeft="24dp"
+            android:layout_marginBottom="300dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/karla"
+                    android:padding="19dp"
+                    android:text="Halo, Saya adalah Assisten virtual \nyang dibentuk oleh Tim Siaga Corona\nAlodok\n\nDimohon untuk menjawab pertanyaan\nberikut sesuai kondisi anda"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardtv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardtv">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/karla"
+                    android:padding="19dp"
+                    android:text="Apakah terdapat demam dengan\nsuhu di atas 38 derajat Celcius?"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbtn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/Cardbbtn1"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv1">
+
+                <Button
+                    android:id="@+id/button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="ya"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbbtn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv1">
+
+                <Button
+                    android:id="@+id/bbutton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="Tidak"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardtv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardbbtn1">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/karla"
+                    android:padding="19dp"
+                    android:text="Apakah anda memiliki kendala \nbatuk?"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbtn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv2">
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="Tidak"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbbtn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/Cardbtn2"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv2">
+
+                <Button
+                    android:id="@+id/bbutton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="ya"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardtv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardbtn2">
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/karla"
+                    android:padding="19dp"
+                    android:text="Apa ada sesak napas sampai \nmerasa kesulitan untuk berbicara?"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbtn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv3">
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="Tidak"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp"
+ />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbbtn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/Cardbtn3"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv3">
+
+                <Button
+                    android:id="@+id/bbutton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="ya"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardtv4"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardbtn3">
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/karla"
+                    android:padding="19dp"
+                    android:text="Apakah memiliki riwayat bepergian \nke negara dengan wabah virus \nCorona di luar Indonesia \n(seperti Cina, Korea Selatan, Jepang, Singapura, Malaysia, \nVietnam, Thailand, Perancis, Inggris, Amerika Serikat, \nSpanyol, Iran, dan Italia) dalam \njangka waktu14 hari terakhir?"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbtn4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv4">
+                <Button
+                    android:id="@+id/button5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="Tidak"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbbtn4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/Cardbtn4"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv4">
+
+                <Button
+                    android:id="@+id/bbutton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="ya"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardtv5"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardbtn4">
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/karla"
+                    android:padding="19dp"
+                    android:text="Apa terdapat riwayat kontak (misalnya: berjabat tangan, mengobrol lama, berada dalam satu ruangan) dengan orang yang sudah dinyatakan positif terinfeksi virus Corona?"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbtn5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv5">
+                <Button
+                    android:id="@+id/button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="Tidak"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp"
+ />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbbtn5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/Cardbtn5"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv5">
+
+                <Button
+                    android:id="@+id/bbutton6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="ya"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardtv6"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardbtn5">
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/karla"
+                    android:padding="19dp"
+                    android:text="apakah ada kontak (misalnya: berjabat tangan, mengobrol lama, berada dalam satu ruangan) dengan orang yang memiliki gejala flu, yaitu demam, batuk, dan pilek, atau dengan orang yang diduga terinfeksi virus Corona?"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbtn6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv6">
+                <Button
+                    android:id="@+id/button7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="Mulai Test"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbbtn6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/Cardbtn6"
+                app:layout_constraintTop_toBottomOf="@+id/Cardtv6">
+
+                <Button
+                    android:id="@+id/bbutton7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="ya"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardtv7"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardbtn6">
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/karla"
+                    android:padding="19dp"
+                    android:text="Virus Corona merupakan virus yang menyerang saluran pernapasan. Gejala yang timbul bila terinfeksi virus ini bisa ringan sampai berat. Gejala yang ringan umumnya seperti gejala flu, yakni demam, batuk, pilek, dan sakit tenggorokan. Sebagian kecil kasus bisa berkembang menjadi berat dan menyebabkan infeksi paru-paru atau pneumonia. Meski begitu, infeksi virus ini juga bisa tidak menimbulkan gejala apa-apa."
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbtv8"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/Cardtv7"
+                app:layout_constraintStart_toStartOf="parent"
+                >
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/karla"
+                    android:padding="19dp"
+                    android:text="Saat ini, Anda disarankan untuk melakukan hal-hal berikut:\n\n- Hubungi Hotline Center Corona di nomor 119 ext. 9, dan ikuti instruksi yang diberikan\n\n- Hindari kontak jarak dekat dengan penderita flu atau batuk\n\n- Konsumsi makanan bergizi seimbang\n\n- Lakukan olahraga secara rutin dan istirahat yang cukup\n\n- Jaga kebersihan lingkungan\n\n- Tidak berpergian ke tempat ramai atau tempat yang sudah memiliki kasus infeksi corona"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Cardbtn7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Cardbtv8">
+                <Button
+                    android:id="@+id/button8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:fontFamily="@font/rubik_bold"
+                    android:padding="15dp"
+                    android:text="OK"
+                    android:textColor="@color/Indigo"
+                    android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

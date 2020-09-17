@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         val dialogAboutFragment = DialogAboutFragment()
         val arrow1 = findViewById<ImageView>(R.id.Image_arrow)
         val arrow2 = findViewById<ImageView>(R.id.Image_arrow2)
+        val arrow3 = findViewById<ImageView>(R.id.Image_arrow3)
         val about = findViewById<ImageView>(R.id.Image_info)
 
         val request: Request = Request.Builder()
@@ -48,23 +49,25 @@ class MainActivity : AppCompatActivity() {
             .build()
         okHttpClient.newCall(request).enqueue(getCallback())
 
-        //klik arrow 1 LOOk UP
         arrow1.setOnClickListener {
             openSecondPage()
         }
 
-        // klik arrow 2 hotline
         arrow2.setOnClickListener {
             bottomSheetFragment.show(supportFragmentManager, "bottomSheetDialog")
         }
 
+        arrow3.setOnClickListener {
+            openSurveyPage()
+        }
+
         about.setOnClickListener {
-            dialogAboutFragment.show(supportFragmentManager,"bottomSheetDialog")
+            dialogAboutFragment.show(supportFragmentManager, "bottomSheetDialog")
         }
 
 
-
     }
+
     private fun getCallback(): Callback {
         return object : Callback {
             override fun onFailure(call: Call, e: IOException) {
@@ -79,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     val jsonArray = JSONArray(jsonString)
                     val homeListFromNetwork: MutableList<TotalCase> = mutableListOf<TotalCase>()
 
-                    for (i in 0 until jsonArray.length()){
+                    for (i in 0 until jsonArray.length()) {
                         homeListFromNetwork.add(
                             TotalCase(
                                 hospitalize = jsonArray.getJSONObject(i).getString("positif"),
@@ -90,15 +93,18 @@ class MainActivity : AppCompatActivity() {
                         )
                     }
                     this@MainActivity.runOnUiThread {
-                        findViewById<TextView>(R.id.TextView_Jumlah).text = homeListFromNetwork.get(0).hospitalize
-                        findViewById<TextView>(R.id.TextView_Number_positive).text = homeListFromNetwork.get(0).positive
-                        findViewById<TextView>(R.id.TextView_Number_recovered).text = homeListFromNetwork.get(0).recovered
-                        findViewById<TextView>(R.id.TextView_Number_death).text = homeListFromNetwork.get(0).death
+                        findViewById<TextView>(R.id.TextView_Jumlah).text =
+                            homeListFromNetwork.get(0).hospitalize
+                        findViewById<TextView>(R.id.TextView_Number_positive).text =
+                            homeListFromNetwork.get(0).positive
+                        findViewById<TextView>(R.id.TextView_Number_recovered).text =
+                            homeListFromNetwork.get(0).recovered
+                        findViewById<TextView>(R.id.TextView_Number_death).text =
+                            homeListFromNetwork.get(0).death
 //                        lookUpAdapter.updateData(lookUpListFromNetwork)
                     }
-                }
-                catch (e : Exception){
-                    this@MainActivity.runOnUiThread{
+                } catch (e: Exception) {
+                    this@MainActivity.runOnUiThread {
                         Toast.makeText(this@MainActivity, e.message, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -114,6 +120,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun openSurveyPage() {
+        val intent = Intent(this, survey::class.java).apply {
+            putExtra("extra", "This is from main activity")
+        }
+        startActivity(intent)
 
-
+    }
 }
