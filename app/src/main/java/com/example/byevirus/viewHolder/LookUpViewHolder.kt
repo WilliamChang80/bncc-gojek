@@ -2,7 +2,7 @@ package com.example.byevirus.viewHolder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.byevirus.model.LookUp
+import com.example.byevirus.entity.LookUp
 import kotlinx.android.synthetic.main.item_look_up.view.*
 
 class LookUpViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -12,7 +12,5 @@ class LookUpViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.Label_recovered.text = data.numberOfRecoveredCases
         itemView.Label_confirmed.text = data.numberOfPositiveCases
         itemView.Label_death.text = data.numberOfDeathCases
-        //kl misalnya mau dijadiin string bisa dengan ini
-        //itemView.Label_recovered.text = "${data.numberOfRecoveredCases}"
     }
 }

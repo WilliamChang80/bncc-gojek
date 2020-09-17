@@ -9,7 +9,7 @@ import android.widget.ImageView
 import androidx.fragment.app.DialogFragment
 import com.example.byevirus.R
 
-class DialogAboutFragment : DialogFragment() {
+class AboutFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class DialogAboutFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.activity_dialog_about_fragment,container,false)
+        val view: View = inflater.inflate(R.layout.activity_about_pop,container,false)
         return view
     }
 
@@ -30,7 +30,7 @@ class DialogAboutFragment : DialogFragment() {
 
         val closeFr = view.findViewById<ImageView>(R.id.close_fragment)
         closeFr.setOnClickListener {
-            this@DialogAboutFragment.dismiss()
+            this@AboutFragment.dismiss()
         }
 
     }

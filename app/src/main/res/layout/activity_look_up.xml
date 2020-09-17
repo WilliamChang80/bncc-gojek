@@ -72,6 +72,4 @@
             tools:listitem="@layout/item_look_up" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
 </RelativeLayout>

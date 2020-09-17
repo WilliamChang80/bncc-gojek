@@ -7,96 +7,87 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.byevirus.model.Hotline
+import androidx.recyclerview.widget.RecyclerView
+import com.ethanhua.skeleton.Skeleton
+import com.ethanhua.skeleton.SkeletonScreen
+import com.example.byevirus.entity.Hotline
 import com.example.byevirus.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_hotline_bottom_sheet.*
 import com.example.byevirus.adapter.HotlineAdapter
-import okhttp3.*
-import org.json.JSONArray
-import java.io.IOException
+import com.example.byevirus.contract.HotlineContract
+import com.example.byevirus.model.HotlineModel
+import com.example.byevirus.presenter.HotlinePresenter
 
-class BottomSheetFragment: BottomSheetDialogFragment(){
+class BottomSheetFragment : BottomSheetDialogFragment(), HotlineContract.View {
 
-    private val mockHotlineList = mutableListOf(
-        Hotline(
-            name = "Loading...",
-            imgIcon = "",
-            phone = ""
-        ),
-    )
+    private lateinit var skeletonScreen: SkeletonScreen
+    private lateinit var hotlineAdapter: HotlineAdapter
+    private lateinit var hotlinePresenter: HotlinePresenter
+
+    companion object {
+        const val NUMBER_OF_LOADING_ITEMS = 7
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.activity_hotline_bottom_sheet,container,false)
+        val view: View = inflater.inflate(R.layout.activity_hotline_bottom_sheet, container, false)
         return view
     }
 
-    //buat tambahin button click listener di dalam di bottom sheet
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hotlinePresenter = HotlinePresenter(HotlineModel(), this)
+        initializeAdapter()
+        initializeCloseButton()
+        initializeLoadingComponents()
+        hotlinePresenter.getData()
+    }
 
-        val okHttpClient = OkHttpClient()
-
-        val hotlineAdapter = HotlineAdapter(mockHotlineList)
+    private fun initializeAdapter() {
+        val mockHotlineList: MutableList<Hotline> = mutableListOf()
+        hotlineAdapter = HotlineAdapter(mockHotlineList)
         rvhotline.layoutManager = LinearLayoutManager(context)
         rvhotline.adapter = hotlineAdapter
+    }
 
-        val close = view.findViewById<ImageView>(R.id.Image_X)
+    private fun initializeLoadingComponents() {
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.rvhotline)
+        skeletonScreen = Skeleton.bind(recyclerView)
+            .adapter(hotlineAdapter)
+            .load(R.layout.hotline_view_skeleton)
+            .count(NUMBER_OF_LOADING_ITEMS).show()
+    }
 
-        close.setOnClickListener {
+    private fun initializeCloseButton() {
+        view?.findViewById<ImageView>(R.id.Image_X)?.setOnClickListener {
             this@BottomSheetFragment.dismiss()
         }
-
-
-        val request: Request = Request.Builder()
-            .url("https://bncc-corona-versus.firebaseio.com/v1/hotlines.json")
-            .build()
-        //new call buat request yang di prepare sama okhttp dan enqueue buat jalanin
-        okHttpClient.newCall(request).enqueue(getCallback(hotlineAdapter))
     }
-    private fun getCallback(hotlineAdapter: HotlineAdapter): Callback {
-        //object buat bikin class dari interface
-        return object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-               //pake activity krn fragment attach di activity
-                this@BottomSheetFragment.activity?.runOnUiThread() {
-                    Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
-                }
 
-            }
+    override fun updateData(hotlineList: MutableList<Hotline>) {
+        stopLoading()
+        hotlineAdapter.updateData(hotlineList)
+    }
 
-            override fun onResponse(call: Call, response: Response) {
-                try {
-                    val jsonString: String? = response.body?.string()
-                    val jsonArray = JSONArray(jsonString)
-                    val hotlineListFromNetwork: MutableList<Hotline> =
-                        mutableListOf<Hotline>()
-
-                    for (i in 0 until jsonArray.length()) {
-                        hotlineListFromNetwork.add(
-                            Hotline(
-                                imgIcon = jsonArray.getJSONObject(i).getString("img_icon"),
-                                phone = jsonArray.getJSONObject(i).getString("phone"),
-                                name = jsonArray.getJSONObject(i).getString("name"),
-
-                                )
-                        )
-                    }
-                    this@BottomSheetFragment.activity?.runOnUiThread {
-                        hotlineAdapter.updateData(hotlineListFromNetwork)
-                    }
-
-                } catch (e: Exception) {
-                    this@BottomSheetFragment.activity?.runOnUiThread {
-                        Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-            }
+    override fun onError(error: Exception) {
+        activity?.runOnUiThread {
+            Toast.makeText(activity, error.message, Toast.LENGTH_SHORT).show()
         }
-     }
     }
+
+    override fun startLoading() {
+        activity?.runOnUiThread {
+            skeletonScreen.show()
+        }
+    }
+
+    override fun stopLoading() {
+        activity?.runOnUiThread {
+            skeletonScreen.hide()
+        }
+    }
+}

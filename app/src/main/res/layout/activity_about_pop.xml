@@ -17,7 +17,7 @@
             android:layout_height="18dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
-            android:src="@drawable/close"
+            android:src="@drawable/exit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,25 +37,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="50dp"
-            android:text="Made with sweat by \nGroup CEG : \n\n- Richard Delbert\n- Ilham\n- William Chang\n- James\n- Toni"
-            android:textSize="20sp"
-            android:fontFamily="@font/rubik_bold"
-            android:textColor="@color/Indigo"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/karla"
             android:text="v1.0.0"
             android:textColor="@color/GreyishBrown"
             android:textSize="16sp"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
